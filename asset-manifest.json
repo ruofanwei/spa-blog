@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/spa-blog/static/css/main.6a6769f8.chunk.css",
+    "main.js": "/spa-blog/static/js/main.fd091371.chunk.js",
+    "main.js.map": "/spa-blog/static/js/main.fd091371.chunk.js.map",
+    "runtime-main.js": "/spa-blog/static/js/runtime-main.a681c183.js",
+    "runtime-main.js.map": "/spa-blog/static/js/runtime-main.a681c183.js.map",
+    "static/css/2.337bf5f1.chunk.css": "/spa-blog/static/css/2.337bf5f1.chunk.css",
+    "static/js/2.4e194771.chunk.js": "/spa-blog/static/js/2.4e194771.chunk.js",
+    "static/js/2.4e194771.chunk.js.map": "/spa-blog/static/js/2.4e194771.chunk.js.map",
+    "static/js/3.1cc7e18d.chunk.js": "/spa-blog/static/js/3.1cc7e18d.chunk.js",
+    "static/js/3.1cc7e18d.chunk.js.map": "/spa-blog/static/js/3.1cc7e18d.chunk.js.map",
+    "index.html": "/spa-blog/index.html",
+    "static/css/2.337bf5f1.chunk.css.map": "/spa-blog/static/css/2.337bf5f1.chunk.css.map",
+    "static/css/main.6a6769f8.chunk.css.map": "/spa-blog/static/css/main.6a6769f8.chunk.css.map",
+    "static/js/2.4e194771.chunk.js.LICENSE.txt": "/spa-blog/static/js/2.4e194771.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a681c183.js",
+    "static/css/2.337bf5f1.chunk.css",
+    "static/js/2.4e194771.chunk.js",
+    "static/css/main.6a6769f8.chunk.css",
+    "static/js/main.fd091371.chunk.js"
+  ]
+}
