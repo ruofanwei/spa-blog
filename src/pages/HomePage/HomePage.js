@@ -65,18 +65,18 @@ const LoadMessage = styled.h1`
   border: 1px dash ${(props) => props.theme.colors.darkGrey};
   border-radius: 10px;
   font-family: 'Neucha';
+  font-size: 30px;
   margin-top: 40px;
   color: ${(props) => props.theme.colors.darkBlue};
   letter-spacing: 2px;
   font-weight: bold;
-  
   padding: 16px;
   text-align:center;
   background: ${(props) => props.theme.colors.darkWhite};
   margin-bottom: 30px;
   box-shadow: 0 0 4px ${(props) => props.theme.colors.darkGrey};
 `
-function Post({posts }){
+function Post({posts}){
   return(
     <PostWrapper>
       {posts.map(post => (
@@ -99,7 +99,7 @@ function Pagination({ postsPerPage, totalPosts, paginate }){
       <PageUl>
         {pageNumbers.map(number => (
           <PageList key={number} className='page-item'>
-            <PageLink onClick={() => paginate(number)} href='!#' className='page-link'>
+            <PageLink onClick={() => paginate(number)} href='#' className='page-link'>
               {number}
             </PageLink>
           </PageList>
