@@ -6,11 +6,9 @@ import {getPosts} from '../../WebAPI'
 const Root = styled.div`
   width: 80%;
   margin: 0 auto;
-  
 `
 const PostWrapper = styled.div`
-  margin-top: 30px;
-  
+  margin-top: 40px;
 `
 const Wrapper = styled.div`
   position: absolute;
@@ -19,9 +17,7 @@ const Wrapper = styled.div`
   transform: translate(-50%);
 `
 const PageList = styled.li`
-   list-style-type: none;
-
-  
+   list-style-type: none;  
 `
 const PageLink = styled.a`
   font-family: 'Neucha';
@@ -65,15 +61,27 @@ const PostDate = styled.div`
   font-weight: bold;
   font-size: ${(props) => props.theme.fonts.SM};
 `
-function Post({posts ,loading}){
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+const LoadMessage = styled.h1`
+  border: 1px dash ${(props) => props.theme.colors.darkGrey};
+  border-radius: 10px;
+  font-family: 'Neucha';
+  margin-top: 40px;
+  color: ${(props) => props.theme.colors.darkBlue};
+  letter-spacing: 2px;
+  font-weight: bold;
+  
+  padding: 16px;
+  text-align:center;
+  background: ${(props) => props.theme.colors.darkWhite};
+  margin-bottom: 30px;
+  box-shadow: 0 0 4px ${(props) => props.theme.colors.darkGrey};
+`
+function Post({posts }){
   return(
     <PostWrapper>
       {posts.map(post => (
-      <List>
-      <PostTitle key={post.id} to={`/posts/${post.id}`}>{post.title}</PostTitle>
+      <List key={post.id}>
+      <PostTitle to={`/posts/${post.id}`}>{post.title}</PostTitle>
       <PostDate>{new Date(post.createdAt).toLocaleString()}</PostDate>
       </List>
       ))}
@@ -109,10 +117,12 @@ export default function HomePage(){
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
   useEffect(() => {
-    setLoading(true);
-    getPosts().then(data => setPosts(data))
-    setLoading(false);
-  },[])
+    setLoading(true)
+    getPosts().then(data => {
+    setPosts(data)
+    setLoading(false)
+    })
+  }, [])
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -123,7 +133,9 @@ export default function HomePage(){
 
     return (
       <Root>
-      <Post posts={currentPosts} loading={loading} />
+      {loading ? (<LoadMessage>loading...</LoadMessage>) : 
+      <Post posts={currentPosts} loading={loading}/>
+       }
       <Pagination
        postsPerPage={postsPerPage}
        totalPosts={posts.length}

@@ -1,6 +1,5 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext , useRef} from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import {login, getMe} from '../../WebAPI'
 import {setAuthToken} from '../../utils'
 import {useHistory} from "react-router-dom";
@@ -77,6 +76,7 @@ export default function LoginPage(){
   const {setUser} = useContext(AuthContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const hasSubmit = useRef(false);
   const [errorMessage, setErrorMessage] = useState()
   const history = useHistory();
   // no errorMessage while isTyping
@@ -85,6 +85,9 @@ export default function LoginPage(){
   };
   const handleSubmit = e => {
     setErrorMessage(null)
+    e.preventDefault();
+    if (hasSubmit.current) return;
+    hasSubmit.current = true;
     login(username, password).then((data) => {
       if(data.ok === 0){
         return setErrorMessage(data.message)
@@ -97,6 +100,7 @@ export default function LoginPage(){
         }
         setUser(response.data)
         history.push("/")
+        hasSubmit.current = false;
       })
     })
   }

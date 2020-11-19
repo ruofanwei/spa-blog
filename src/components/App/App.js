@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import LoginPage from '../../pages/LoginPage';
 import RegisterPage from '../../pages/RegisterPage';
 import AboutPage from '../../pages/AboutPage';
@@ -27,18 +26,22 @@ const Root = styled.div`
 `
 function App() {
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     // 有 token才 call api
     if (getAuthToken()){
+      setLoading(true)
       getMe().then(response => {
       if (response.ok){
         setUser(response.data)
+        setLoading(false)
       }
+      setLoading(false)
     })
   }
   },[])
   return (
-    <AuthContext.Provider value={{user, setUser}}>
+    <AuthContext.Provider value={{user, setUser,loading, setLoading}}>
     <Root>
       <Router>
       <Header/>

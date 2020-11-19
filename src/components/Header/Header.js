@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 import {Link, useLocation, useHistory} from "react-router-dom";
 import {AuthContext} from '../../context'
@@ -57,7 +57,7 @@ const Nav = styled(Link)`
 export default function Header(){
   const location = useLocation()
   const history = useHistory();
-  const {user, setUser} = useContext(AuthContext)
+  const {user, setUser, loading} = useContext(AuthContext)
   const handleLogout = () => {
     setAuthToken('')
     setUser(null)
@@ -65,7 +65,6 @@ export default function Header(){
       history.push('/')
     }
   }
-  console.log(location.pathname)
     return (
     <HeaderContainer>
       <Wrapper>
@@ -76,17 +75,13 @@ export default function Header(){
          {user && <Nav to="/new-post" $active={location.pathname === '/new-post'}>Post</Nav>}
         </NavbarList>
       </Wrapper>
+      {loading ? null : (
       <NavbarList>
-        {!user && (
-        <>
-          <Nav to="/login" $active={location.pathname === '/login'}>Login</Nav>
-          <Nav to="/register" $active={location.pathname === '/register'}>Register</Nav>
-        </>
-        )}
-        
-        {user && <Nav onClick={handleLogout}>Logout</Nav>}
+        {!user && (<Nav to="/login" $active={location.pathname === '/login'}>Login</Nav>)}
+        {!user && (<Nav to="/register" $active={location.pathname === '/register'}>Register</Nav>)}
+        {user && <Nav to="/" onClick={handleLogout}>Logout</Nav>}
       </NavbarList>
-      
+      )}
     </HeaderContainer>
   )
 }

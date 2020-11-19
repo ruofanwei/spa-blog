@@ -1,8 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {useHistory} from "react-router-dom";
 import {releaseNewPost} from '../../WebAPI'
 const ErrorMessage = styled.div`
+  font-family: 'Neucha';
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: ${(props) => props.theme.fonts.MD};
   color: red;
 `;
 
@@ -17,7 +21,7 @@ const Form = styled.form`
 
 const Title = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 const Input = styled.input`
   width: 800px;
@@ -73,6 +77,7 @@ const Button = styled.button`
   padding: 10px;
   border-color: ${(props) => props.theme.colors.brightYellow};
   &:hover{
+    outline: none;
     background: ${(props) => props.theme.colors.brightBlue};
     border-color: ${(props) => props.theme.colors.brightBlue};
     color:  ${(props) => props.theme.colors.white};
@@ -84,6 +89,10 @@ export default function CreateNewPostPage(){
   const [content, setContent] = useState('')
   const [errorMessage, setErrorMessage] = useState()
   const history = useHistory()
+  // no errorMessage while isTyping
+  const handleFocus = () => {
+    setErrorMessage(null)
+  };
   const handleSubmit = (e) => {
     e.preventDefault()
     releaseNewPost(title, content).then((data) => {
@@ -95,14 +104,14 @@ export default function CreateNewPostPage(){
   }
     return (
       <Form onSubmit={handleSubmit}>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <Title value={title} onChange={e => setTitle(e.target.value)} >
-        <Input/>
+        <Input onFocus={handleFocus}/>
         </Title>
         <Content value={content} onChange={e => setContent(e.target.value)}>
-        <Textarea/>
+        <Textarea onFocus={handleFocus}/>
         </Content>
         <Button>Post</Button>
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </Form>
     )
 }

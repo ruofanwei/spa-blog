@@ -1,14 +1,10 @@
-import React, {useState, useEffect} from "react";
 import styled, { keyframes }  from "styled-components";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import {getPosts} from '../../WebAPI'
 const Typing = keyframes`
   from { width: 0 }
 `
 const Caret = keyframes`
-  50% { border-color: transparent; }
-  100% {border-right: none; width: none;}
+  50% { border-color: transparent; border-right: .05em solid; }
+  100% { width: none; border-right: .05em solid;}
 `
 const Wrapper = styled.div`
   margin-top: 70px;
@@ -39,10 +35,9 @@ const Text = styled.h1`
   overflow: hidden;
   white-space: nowrap;
   width: 4em;
-  border-right: .05em solid;
   animation: 
-    ${Typing} 10s steps(11) infinite,
-     ${Caret} 1s steps(1) infinite;
+    ${Typing} 6s steps(11),
+     ${Caret} 1s steps(1);
 
   &:hover{
     text-decoration: none;
@@ -64,10 +59,9 @@ const Content = styled.p`
   overflow: hidden;
   white-space: nowrap;
   width: 12em;
-  border-right: .05em solid;
   animation: 
-    ${Typing} 9s steps(11) infinite,
-     ${Caret} 1s steps(1) infinite;
+    ${Typing} 7s steps(11),
+     ${Caret} 1s steps(1);
 
   &:hover{
     text-decoration: none;
