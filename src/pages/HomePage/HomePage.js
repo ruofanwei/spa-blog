@@ -86,7 +86,6 @@ function Post({posts}){
       </List>
       ))}
     </PostWrapper>
-  
   )
 }
 function Pagination({ postsPerPage, totalPosts, paginate }){
@@ -116,21 +115,19 @@ export default function HomePage(){
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-  useEffect(() => {
-    setLoading(true)
-    getPosts().then(data => {
-    setPosts(data)
-    setLoading(false)
-    })
-  }, [])
-
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
+  useEffect(() => {
+      setLoading(true)
+      getPosts().then(data => {
+      setPosts(data)
+      setLoading(false)
+      })
+    }, [])
     return (
       <Root>
       {loading ? (<LoadMessage>loading...</LoadMessage>) : 
