@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef} from "react";
+import React, {useState, useContext} from "react";
 import styled from "styled-components";
 import {register, getMe} from '../../WebAPI'
 import {setAuthToken} from '../../utils'
@@ -75,7 +75,6 @@ const ErrorMessage = styled.div`
 
 export default function RegisterPage(){
   const {setUser} = useContext(AuthContext)
-  const hasSubmit = useRef(false);
   const [nickname, setNickname] = useState('');
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -88,8 +87,6 @@ export default function RegisterPage(){
   const handleSubmit = e => {
     setErrorMessage(null) 
     e.preventDefault();
-    if (hasSubmit.current) return;
-    hasSubmit.current = true;
     register(nickname,username, password).then((data) => {
       if(data.ok === 0){
         return setErrorMessage(data.message)
@@ -102,7 +99,6 @@ export default function RegisterPage(){
         }
         setUser(response.data) 
         history.push("/") 
-         hasSubmit.current = false;
       })
     })
   }
