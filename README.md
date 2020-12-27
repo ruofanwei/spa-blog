@@ -13,4 +13,4 @@
 - 單篇文章頁面：點進去文章以後可以看到文章完整內容
 - 發表文章頁面：可以輸入標題跟內文發文
 
-![](https://s4.aconvert.com/convert/p3r68-cdx67/tfasm-98t5m.gif)
+![](https://i.imgur.com/WeJEXgh.jpg)
